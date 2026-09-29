@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS attendance (
+    id SERIAL PRIMARY KEY,
+    classroom VARCHAR(100) NOT NULL,
+    students INTEGER NOT NULL,
+    attendance DOUBLE PRECISION NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);

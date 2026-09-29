@@ -1,0 +1,5 @@
+[project]
+name = "vignan-ai-classroom"
+version = "1.0.0"
+description = "Vignan AI Classroom Monitoring and Analytics System"
+requires-python = ">=3.12,<3.13"

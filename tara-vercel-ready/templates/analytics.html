@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero compact">
+  <div><p class="eyebrow">ANALYTICS</p><h1>Classroom Analytics</h1></div>
+</section>
+
+<section class="cards">
+  <div class="card"><span>Total Classes</span><strong id="aClasses">25</strong></div>
+  <div class="card"><span>Total Students</span><strong id="aStudents">0</strong></div>
+  <div class="card"><span>Attendance</span><strong id="aAttendance">0%</strong></div>
+  <div class="card"><span>AI Cameras</span><strong id="aCameras">0/25</strong></div>
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>Classroom-wise Status</h2><span>Live data</span></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Camera</th><th>Classroom</th><th>Students</th><th>Attention</th><th>Activity</th><th>Status</th></tr></thead>
+      <tbody id="analyticsTable"></tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function loadAnalyticsPage() {
+  const response = await fetch('/api/dashboard', {cache:'no-store'});
+  const data = await response.json();
+  document.getElementById('aStudents').textContent = data.total_students;
+  document.getElementById('aAttendance').textContent = data.attendance + '%';
+  document.getElementById('aCameras').textContent = `${data.online_cameras}/25`;
+  document.getElementById('analyticsTable').innerHTML = data.cameras.map(c => `
+    <tr>
+      <td>#${c.id}</td><td>${c.name}</td><td>${c.students}</td>
+      <td>${c.attention}%</td><td>${c.activity}</td>
+      <td><span class="status ${c.status}">${c.status}</span></td>
+    </tr>`).join('');
+}
+loadAnalyticsPage();
+setInterval(loadAnalyticsPage, 5000);
+</script>
+{% endblock %}

@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Vignan's AI Classroom Dashboard</title>
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',Arial;
+}
+
+
+body{
+
+min-height:100vh;
+color:white;
+
+background:
+linear-gradient(
+rgba(2,6,23,.92),
+rgba(15,23,42,.95)
+),
+url("vignan.jpg");
+
+background-size:cover;
+background-position:center;
+
+}
+
+
+
+/* Background Animation */
+
+body:before{
+
+content:"";
+position:fixed;
+
+width:450px;
+height:450px;
+
+background:#2563eb;
+
+border-radius:50%;
+
+filter:blur(140px);
+
+animation:move 8s infinite alternate;
+
+z-index:-1;
+
+}
+
+
+@keyframes move{
+
+from{
+transform:translate(-100px,-100px);
+}
+
+to{
+transform:translate(600px,300px);
+}
+
+}
+
+
+
+/* HEADER */
+
+
+header{
+
+padding:25px 40px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+background:rgba(15,23,42,.8);
+
+backdrop-filter:blur(20px);
+
+}
+
+
+
+.logo{
+
+font-size:30px;
+
+font-weight:800;
+
+}
+
+
+.logo span{
+
+color:#38bdf8;
+
+}
+
+
+
+.live{
+
+background:#052e16;
+
+color:#22c55e;
+
+padding:12px 25px;
+
+border-radius:30px;
+
+}
+
+
+
+
+.container{
+
+padding:25px;
+
+}
+
+
+
+/* KPI */
+
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:20px;
+
+}
+
+
+
+.card{
+
+background:rgba(30,41,59,.8);
+
+padding:25px;
+
+border-radius:20px;
+
+text-align:center;
+
+box-shadow:0 0 25px black;
+
+transition:.3s;
+
+}
+
+
+
+.card:hover{
+
+transform:translateY(-10px);
+
+}
+
+
+
+.card h3{
+
+color:#94a3b8;
+
+}
+
+
+
+.number{
+
+font-size:42px;
+
+color:#22c55e;
+
+font-weight:bold;
+
+}
+
+
+
+
+/* MAIN */
+
+
+.main{
+
+display:grid;
+
+grid-template-columns:2fr 1fr;
+
+gap:25px;
+
+margin-top:25px;
+
+}
+
+
+
+.panel{
+
+background:rgba(30,41,59,.85);
+
+padding:25px;
+
+border-radius:25px;
+
+}
+
+
+
+
+.camera img{
+
+width:100%;
+
+height:400px;
+
+background:black;
+
+border-radius:20px;
+
+border:3px solid #38bdf8;
+
+}
+
+
+
+
+
+/* ANALYTICS */
+
+
+.analysis-box{
+
+background:#0f172a;
+
+padding:18px;
+
+margin:15px 0;
+
+border-radius:15px;
+
+font-size:20px;
+
+display:flex;
+
+justify-content:space-between;
+
+}
+
+
+
+.analysis-box b{
+
+color:#38bdf8;
+
+}
+
+
+
+.status{
+
+color:#22c55e;
+
+}
+
+
+
+
+/* CAMERA GRID */
+
+
+.camera-grid{
+
+margin-top:30px;
+
+display:grid;
+
+grid-template-columns:repeat(5,1fr);
+
+gap:15px;
+
+}
+
+
+
+.cam{
+
+background:rgba(30,41,59,.85);
+
+padding:12px;
+
+border-radius:15px;
+
+cursor:pointer;
+
+border:1px solid #334155;
+
+transition:.3s;
+
+}
+
+
+
+.cam:hover{
+
+transform:scale(1.05);
+
+box-shadow:0 0 20px #2563eb;
+
+}
+
+
+
+.cam h3{
+
+text-align:center;
+
+color:#38bdf8;
+
+}
+
+
+
+.cam img{
+
+width:100%;
+
+height:130px;
+
+background:black;
+
+border-radius:10px;
+
+}
+
+
+
+footer{
+
+margin-top:30px;
+
+padding:20px;
+
+text-align:center;
+
+background:#1e293b;
+
+border-radius:20px;
+
+color:#94a3b8;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<header>
+
+
+<div class="logo">
+
+🏫 <span>Vignan's</span> Students Strength Dashboard
+
+</div>
+
+
+<div class="live">
+
+🟢 LIVE SYSTEM ACTIVE
+
+</div>
+
+
+</header>
+
+
+
+
+<div class="container">
+
+
+
+<!-- KPI -->
+
+
+<section class="cards">
+
+
+<div class="card">
+
+<h3>Total Students</h3>
+
+<div class="number">
+850
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Present Today</h3>
+
+<div class="number" id="totalPresent">
+
+782
+
+</div>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>Attendance</h3>
+
+<div class="number">
+
+92%
+
+</div>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>Active Cameras</h3>
+
+<div class="number">
+
+25
+
+</div>
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- MAIN CAMERA -->
+
+<section class="main">
+
+
+<div class="panel camera">
+
+
+<h2 id="title">
+
+📷 Class A101 Live Monitoring
+
+</h2>
+
+
+<br>
+
+
+<img id="mainCamera" src="/video/1">
+
+
+
+</div>
+
+
+
+
+
+<!-- AI ANALYTICS -->
+
+
+<div class="panel">
+
+
+<h2>
+🤖 AI Student Analytics
+</h2>
+
+
+
+<div class="analysis-box">
+
+🏫 Class
+
+<b id="room">
+A101
+</b>
+
+</div>
+
+
+
+
+<div class="analysis-box">
+
+👨 Students
+
+<b id="students">
+70
+</b>
+
+</div>
+
+
+
+
+<div class="analysis-box">
+
+👨‍🏫 Faculty
+
+<b class="status" id="faculty">
+
+Present
+
+</b>
+
+</div>
+
+
+
+
+<div class="analysis-box">
+
+🪑 Empty Seats
+
+<b id="empty">
+
+0
+
+</b>
+
+</div>
+
+
+
+
+<div class="analysis-box">
+
+📷 Camera
+
+<b class="status">
+
+Online
+
+</b>
+
+</div>
+
+
+
+
+<div class="analysis-box">
+
+🎯 Attention
+
+<b>
+
+88%
+
+</b>
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- 25 CAMERAS -->
+
+
+<h2 style="margin-top:30px">
+
+📷 Classroom Camera Network
+
+</h2>
+
+
+
+
+<section class="camera-grid">
+
+
+<script>
+
+
+for(let i=1;i<=25;i++)
+
+{
+
+
+document.write(`
+
+
+<div class="cam"
+onclick="changeCamera(${i})">
+
+
+<h3>
+
+Class A${100+i}
+
+</h3>
+
+
+<img src="/video/${i}">
+
+
+<p>
+
+🟢 Online
+
+<br>
+
+Click Monitor
+
+</p>
+
+
+</div>
+
+
+`);
+
+
+}
+
+
+
+</script>
+
+
+</section>
+
+
+
+
+
+
+<footer>
+
+🏢 Vignan's Foundation for Science Technology & Research
+
+<br>
+
+AI Powered Smart Classroom Monitoring System
+
+</footer>
+
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+
+function changeCamera(id)
+
+{
+
+
+let room="A"+(100+id);
+
+
+
+document.getElementById(
+"mainCamera"
+).src="/video/"+id;
+
+
+
+document.getElementById(
+"title"
+).innerHTML=
+"📷 Class "+room+" Live Monitoring";
+
+
+
+document.getElementById(
+"room"
+).innerHTML=room;
+
+
+
+let students=
+Math.floor(Math.random()*25)+45;
+
+
+
+document.getElementById(
+"students"
+).innerHTML=students;
+
+
+
+document.getElementById(
+"empty"
+).innerHTML=
+70-students;
+
+
+
+let faculty=
+Math.random()>0.2?
+"Present":
+"Absent";
+
+
+document.getElementById(
+"faculty"
+).innerHTML=faculty;
+
+
+
+}
+
+
+
+
+</script>
+
+
+</body>
+
+</html>

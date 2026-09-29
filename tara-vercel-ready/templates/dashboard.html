@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">AI CLASSROOM MONITORING</p>
+    <h1>Students Strength & Classroom Intelligence</h1>
+    <p class="muted">Privacy-preserving occupancy and classroom analytics. No face names or student IDs are required.</p>
+  </div>
+  <div class="system-pill" id="systemStatus">● Connecting...</div>
+</section>
+
+<section class="cards">
+  <div class="card"><span>Total Students</span><strong id="totalStudents">0</strong></div>
+  <div class="card"><span>Present Today</span><strong id="presentToday">0</strong></div>
+  <div class="card"><span>Attendance</span><strong id="attendance">0%</strong></div>
+  <div class="card"><span>Active Cameras</span><strong id="onlineCameras">0/25</strong></div>
+</section>
+
+<section class="layout-two">
+  <div class="panel featured">
+    <div class="panel-head"><h2>📷 Classroom Network</h2><span id="lastRefresh">Waiting...</span></div>
+    <div id="cameraGrid" class="camera-grid"></div>
+  </div>
+
+  <aside class="panel">
+    <div class="panel-head"><h2>🤖 AI Analytics</h2></div>
+    <div class="metric"><span>Average Attention</span><b id="attention">0%</b></div>
+    <div class="metric"><span>Online Cameras</span><b id="onlineCount">0</b></div>
+    <div class="metric"><span>Offline Cameras</span><b id="offlineCount">25</b></div>
+    <div class="metric"><span>Data Source</span><b>AI Worker</b></div>
+    <div class="notice">For physical cameras, run <code>worker/ai_worker.py</code> on the computer that can access the cameras.</div>
+  </aside>
+</section>
+{% endblock %}
